@@ -1,0 +1,49 @@
+{% extends 'basic.html' %}
+{% block basic %}
+{% load staticfiles %}
+<!-- CSS CUSTOM -->
+<link rel='stylesheet' href="{% static 'css/styles.css' %}">
+<div class="container-fluid login-bg login-height">
+    {% if error %}
+    <h5 class="text-center py-3 text-danger"style="background-color:rgba(0, 0, 0, 0.8);">* {{ error }}</h5>
+    <br><br>
+    {% endif %}
+    <div class="row">
+        <!-- contact form -->
+        <div class="col-md-4 col-sm-8 mx-auto" style="margin-top:100px;">
+          <div class="card card-body bg-secondary ">
+            <!-- form title -->
+            <div class="card-title text-center text-white">
+              <h2 class="text-capitalize">hunted a product ?</h2><p class="text-warning">log in !</p>
+            </div>
+            <!-- end of form title -->
+            <!-- form -->
+            <form method="POST" action="{% url 'login' %}" class="">
+            <!-- for security -->
+            {% csrf_token %}
+             <!-- font awesome -->
+             <div class="input-group my-3">
+              <!-- prepend -->
+              <div class="input-group-prepend">
+               <span class="input-group-text"><i class="fas fa-user"></i></span>
+             </div>
+             <!-- end of prepend -->
+             <input type="text" id="group-username" name="username" class="form-control" placeholder="username">
+           </div>
+           <div class="input-group my-3">
+                <!-- prepend -->
+                <div class="input-group-prepend">
+                 <span class="input-group-text"><i class="fas fa-key"></i></span>
+               </div>
+               <!-- end of prepend -->
+               <input type="password" id="group-password-1" name="password" class="form-control" placeholder="password">
+             </div>
+           <button type="submit" value="signup" class="btn btn-warning btn-block text-uppercase">log in</button>
+  
+         </form>
+         <!-- end of form -->
+       </div>
+    </div>
+</div>
+</div>
+{% endblock basic %}

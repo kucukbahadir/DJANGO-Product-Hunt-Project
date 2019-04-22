@@ -1,0 +1,58 @@
+{% extends 'basic.html' %}
+{% block basic %}
+{% load staticfiles %}
+<!-- CSS CUSTOM -->
+<link rel='stylesheet' href="{% static 'css/styles.css' %}">
+<div class="container-fluid signup-bg signup-height">
+    {% if error %}
+    <h5 class="text-center py-3 text-danger"style="background-color:rgba(0, 0, 0, 0.8);">* {{ error }}</h5>
+   
+    <br><br>
+    {% endif %}
+    <div class="row " >
+        <!-- contact form -->
+        <div class="col-md-4 col-sm-12 mx-auto" style="margin-top:40px;">
+          <div class="card card-body bg-secondary ">
+            <!-- form title -->
+            <div class="card-title text-center text-white">
+              <h2 class="text-capitalize">new to product hunt?</h2><p class="text-warning">sign up!</p>
+            </div>
+            <!-- end of form title -->
+            <!-- form -->
+            <form method="POST" action="{% url 'signup' %}" class="">
+            <!-- for security -->
+            {% csrf_token %}
+             <!-- font awesome -->
+             <div class="input-group my-3">
+              <!-- prepend -->
+              <div class="input-group-prepend">
+               <span class="input-group-text"><i class="fas fa-user"></i></span>
+             </div>
+             <!-- end of prepend -->
+             <input type="text" id="group-username" name="username" class="form-control" placeholder="username">
+           </div>
+           <div class="input-group my-3">
+                <!-- prepend -->
+                <div class="input-group-prepend">
+                 <span class="input-group-text"><i class="fas fa-key"></i></span>
+               </div>
+               <!-- end of prepend -->
+               <input type="password" id="group-password-1" name="password1" class="form-control" placeholder="password (min 4 character)">
+             </div>
+             <div class="input-group my-3">
+                    <!-- prepend -->
+                    <div class="input-group-prepend">
+                     <span class="input-group-text"><i class="fas fa-check"></i></span>
+                   </div>
+                   <!-- end of prepend -->
+                   <input type="password" id="group-password-2" name="password2" class="form-control" placeholder="confirm password">
+                 </div>
+           <button type="submit" value="signup" class="btn btn-warning btn-block text-uppercase">sign up</button>
+  
+         </form>
+         <!-- end of form -->
+       </div>
+    </div>
+</div>
+</div>
+{% endblock basic %}

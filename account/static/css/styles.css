@@ -1,0 +1,15 @@
+.signup-bg{
+    background:url('../bg/a.jpg')center/cover no-repeat fixed;
+}
+.login-bg{
+    background:url('../bg/a.jpg')center/cover no-repeat fixed;
+}
+#hmpg{
+    background: linear-gradient(rgb(0,0,0,0.4),rgb(0,0,0,0.7)s),
+}
+.signup-height{
+	min-height: 73vh;
+}
+.login-height{
+	min-height: 73vh;
+}

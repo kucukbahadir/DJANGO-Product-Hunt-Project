@@ -1,0 +1,61 @@
+{% extends 'basic.html' %}
+{% block basic %}
+{% load staticfiles %}
+<!-- CSS CUSTOM -->
+<link rel='stylesheet' href="{% static 'css/home.css' %}">
+<div class="container-fluid create-bg create-height ">
+    {% if error %}
+    {{ error }}
+    <br><br>
+    {% endif %}
+    <div class="row">
+        <!-- contact form -->
+        <div class="col-md-4 col-sm-12 my-5 mx-auto">
+            <div class="card card-body bg-secondary">
+                <!-- form title -->
+                <div class="card-title text-center text-white">
+                    <h2 class="text-capitalize">create a new product</h2>
+                </div>
+                <!-- end of form title -->
+                <!-- form -->
+                <form method="POST" action="{% url 'create' %}"  enctype="multipart/form-data">
+                    <!-- for security -->
+                    {% csrf_token %}
+                    <!-- title -->
+                    <div class="form-group mt-3">
+                        <input type="text" id="title" name="title" class="form-control form-control-lg"
+                            placeholder="title">
+                    </div>
+                    <!-- description -->
+                    <div class="form-group mt-3">
+                        <input type="textbox" id="body" name="body" class="form-control form-control-lg"
+                            placeholder="description about product (max-500)">
+                    </div>
+                    <!-- url -->
+                    <div class="form-group mt-3">
+                        <input type="text" id="url" name="url" class="form-control form-control-lg" placeholder="url">
+                    </div>
+                    <!-- icon -->
+                    <div class="form-group mt-3">
+                        <input type="text" readonly
+                            class="form-control-plaintext form-control input-sm bg-light text-secondary "
+                            value="  upload icon">
+                        <input type="file" class="form-control-file form-control-sm" id="icon" name="icon">
+                    </div>
+                    <!-- image -->
+                    <div class="form-group mt-3">
+                        <input type="text" readonly
+                            class="form-control-plaintext form-control input-sm bg-light text-secondary "
+                            value="  upload image">
+                        <input type="file" class="form-control-file form-control-sm" id="image" name="image">
+                    </div>
+                    <!-- end of image -->
+                    <button type="submit" value="create" class="btn btn-outline-warning btn-block text-uppercase">add your product
+                    </button>
+                </form>
+                <!-- end of form -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock basic %}

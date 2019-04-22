@@ -1,0 +1,48 @@
+{% extends 'basic.html' %}
+{% block basic %}
+{% load staticfiles %}
+<!-- CSS CUSTOM -->
+<link rel='stylesheet' href="{% static 'css/home.css' %}">
+<div class="container-fluid  py-5 detail-bg hmpg ">
+    <div class="row col-md-8 my-3  ">
+        <div class="col-2">
+            <img src="{{ product.icon.url }}" class="img-fluid rounded" alt="">
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="{{ product.url }}">
+                <h1 class="text-capitalize text-warning" style="background-color:rgba(0, 0, 0, 0.4);">{{ product.title }}</h1>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-9">
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="">
+        </div>
+        <div class="col-md-3 my-3 ">
+            <a href="javascript:{document.getElementById('upvote').submit()}"><button
+                    class="btn btn-warning btn-lg btn-block">Upvote <i class="far fa-thumbs-up"></i>
+                    {{ product.votes_total }}</button></a>
+        </div>
+    </div>
+    <div class="col-md-9 mt-1  pr-2 d-flex align-items-center text-light " style="background-color:rgba(0, 0, 0, 0.4);">
+            <div class="col-md-8 mx-auto">
+                <h4> <i class="fab fa-grunt fa-1x mr-2 orange "></i>Hunted by <span
+                        class="text-warning text-capitalize ">{{ product.hunter.username }}</span></h4>
+            </div>
+            <div class="col-md-4 mx-auto text-right">
+                <p><i class="fas fa-calendar-alt fa-2x mt-2 mr-2 orange "></i>{{ product.pub_date_pretty }}</p>
+            </div>
+    </div>
+    <div class="col-md-9 mt-3 text-light" style="background-color:rgba(0, 0, 0, 0.4);">
+        <div class="col-md-10">
+            <p class="qcont">{{ product.body }}</p>
+        </div>
+    </div>
+    <form id="upvote" method="POST" action="{% url 'upvote' product.id %}">
+        {% csrf_token %}
+        <input type="hidden">
+    </form>
+</div>
+
+
+{% endblock basic %}

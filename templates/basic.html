@@ -1,0 +1,188 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Product Hunt</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--google fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:600" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Maven Pro', sans-serif;
+            min-height: 100vh;
+        }
+
+        footer {
+            min-height: 20vh;
+        }
+
+        .home-background {
+            background: url(/background/home.jpg)center/cover no-repeat fixed;
+        }
+
+
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .text-orange,
+        .navbar-brand i {
+            color: rgb(255, 143, 64) !important;
+        }
+
+        #navbar_elements .nav-item {
+            color: rgb(255, 126, 34) !important;
+        }
+        .text-orange{
+            color: rgb(255, 126, 34) !important;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="album.css" rel="stylesheet">  -->
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand active d-flex align-items-center" href="{% url 'home' %}"> <i
+                    class="fab fa-grunt fa-2x mr-2 " id='l'></i> Product Hunt</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto" id="navbar_elements">
+                    {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'create' %}"><i class="fas fa-plus-square"></i></a>
+                    <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Log
+                        Out</a>
+                    <form method="POST" id="logout" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                    {% else %}
+                    <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container"></div>
+        {% block basic %}
+        {% endblock basic %}
+        </div>
+    </main>
+    <!-- footer section -->
+    <footer id="footer" class="bg-dark py-2">
+        <div class="container">
+
+            {% if user.is_authenticated %}
+            <button class="btn btn-danger  d-block mx-auto my-3 " data-toggle='modal'
+                data-target='#modal'>logout</button>
+            {% endif %}
+            <div class="row">
+                <div class="col d-flex justify-content-around align-items-center">
+                    <a href="" class="btn">
+                        <i class="fab fa-facebook fa-2x text-primary"></i>
+                    </a>
+                    <a href="" class="btn">
+                        <i class="fab fa-twitter fa-2x text-primary"></i>
+                    </a>
+                    <a href="" class="btn">
+                        <i class="fab fa-instagram fa-2x text-primary m-2"></i>
+                    </a>
+                    <a href="" class="btn">
+                        <i class="fab fa-linkedin fa-2x text-primary"></i>
+                    </a>
+                    <a href="" class="btn">
+                        <i class="fab fa-youtube fa-2x text-primary"></i>
+                    </a>
+                    <a href="" class="btn">
+                        <i class="fab fa-github fa-2x text-primary"></i>
+                    </a>
+                </div>
+                <div class="container">
+                    <div>
+                        <p class="text-center text-orange">© kucukbahadir {% now "Y" %}</p>
+                        <p class="text-center">
+                            <a href="">Back to top</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- end of footer section -->
+
+    <!-- modal -->
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- modal header -->
+                <div class="modal-header">
+                    <h3 class="modal-title">sorry to see you leave</h3>
+                    <button type="button" class="close" data-dismiss='modal '><a href="">&times;</a></button>
+                </div>
+                <!-- end of modal header -->
+                <!-- modal body -->
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, veniam.</p>
+                </div>
+                <!-- end of modal body -->
+                <div class="modal-footer">
+                    <a href="javascript:{document.getElementById('logout').submit()}">
+                        <button type="button" class="btn btn-danger" data-dismiss=>log out</button>
+                    </a>
+                    <form method="POST" id="logout" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                </div>
+                <!-- end of modal footer -->
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
